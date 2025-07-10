@@ -1,0 +1,30 @@
+/**
+ * src/styles/settings.scss
+ *
+ * Configures SASS variables and Vuetify overwrites
+ */
+// https://vuetifyjs.com/features/sass-variables/`
+@use "vuetify/settings" with (
+    $body-font-family: (
+        "Bitcount Grid Double",
+        "DM Sans",
+        "Roboto",
+        sans-serif,
+    ),
+    $heading-font-family: (
+        "Bitcount Grid Double",
+        "DM Sans",
+        "Roboto",
+        sans-serif,
+    ),
+    $font-size-root: 16px
+);
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+@font-face {
+    font-family: "BitcountGridDouble";
+    font-style: normal;
+    src: url("../assets/fonts/Bitcount_Grid_Double/BitcountGridDouble-VariableFont_CRSV\,ELSH\,ELXP\,slnt\,wght.ttf")
+        format("truetype-variations");
+}
