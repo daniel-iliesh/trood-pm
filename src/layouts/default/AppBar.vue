@@ -7,7 +7,9 @@
     </template>
 
     <v-app-bar-title class="py-10" height="40px">
-      <h1 class="align-content-center">TROOD COMMUNITY</h1>
+      <router-link style="text-decoration: none; color: inherit" to="/">
+        <h1 class="align-content-center">TROOD COMMUNITY</h1>
+      </router-link>
     </v-app-bar-title>
 
     <template v-slot:append>

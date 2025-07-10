@@ -28,7 +28,10 @@
               </v-col>
               <v-col>
                 <div class="text-black input-lbl">Deadline</div>
-                <v-date-input v-model="project.deadline" />
+                <v-date-input
+                  input-format="dd.mm.yyyy"
+                  v-model="projectDeadline"
+                />
               </v-col>
             </v-row>
             <v-row>
@@ -61,6 +64,7 @@
 <script setup lang="ts">
 import { Project } from "@/api/dtos";
 import { getProject, updateProject } from "@/api/projects";
+import { computed } from "vue";
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router/auto";
 
@@ -68,6 +72,31 @@ const route = useRoute("/projects/[id]/edit");
 const router = useRouter();
 const project = ref<Project | null>(null);
 const loading = ref(false);
+
+const projectDeadline = computed({
+  get() {
+    if (!project.value) return null;
+    const date = new Date(project.value.deadline);
+
+    if (isNaN(date.getTime())) {
+      const formattedDateStr = project.value.deadline
+        .split(".")
+        .reverse()
+        .join(".");
+      return formattedDateStr;
+    }
+    return date;
+  },
+  set(newValue: Date) {
+    if (!project.value) return;
+    project.value.deadline = newValue
+      .toISOString()
+      .split("T")[0]
+      .split("-")
+      .reverse()
+      .join(".");
+  },
+});
 
 const submitProjectUpdate = async () => {
   try {
