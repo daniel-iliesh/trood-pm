@@ -1,16 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Welcome to Vuetify 3</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to Vuetify 3</title>
-</head>
+        <script type="text/javascript">
+            function getBasePath() {
+                if (
+                    window.location.hostname.endsWith("github.io") &&
+                    window.location.pathname === "/"
+                ) {
+                    return "/";
+                }
 
-<body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-</body>
+                const pathSegments = window.location.pathname.split("/");
+                const repoName = pathSegments.filter(
+                    (segment) => segment !== "",
+                )[0];
 
+                if (repoName) {
+                    return `/${repoName}/`;
+                }
+
+                return "/";
+            }
+
+            const basePath = getBasePath();
+            const currentPath = window.location.pathname;
+            const currentSearch = window.location.search;
+            const currentHash = window.location.hash;
+
+            const urlParams = new URLSearchParams(currentSearch);
+
+            const encodedPath = urlParams.get("p");
+
+            if (encodedPath) {
+                const originalPath = decodeURIComponent(encodedPath);
+
+                urlParams.delete("p");
+                const newSearch = urlParams.toString()
+                    ? `?${urlParams.toString()}`
+                    : "";
+
+                const cleanUrl = `${basePath}${originalPath}${newSearch}${currentHash}`;
+
+                history.replaceState(null, null, cleanUrl);
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="app"></div>
+        <script type="module" src="/src/main.ts"></script>
+    </body>
 </html>

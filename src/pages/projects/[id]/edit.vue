@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { Project } from "@/api/dtos";
 import { getProject, updateProject } from "@/api/projects";
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router/auto";
 
 const route = useRoute("/projects/[id]/edit");
